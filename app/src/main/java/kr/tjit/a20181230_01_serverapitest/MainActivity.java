@@ -1,5 +1,6 @@
 package kr.tjit.a20181230_01_serverapitest;
 
+import android.content.Intent;
 import android.os.Bundle;
 import android.util.Log;
 import android.view.View;
@@ -37,6 +38,16 @@ public class MainActivity extends BaseActivity {
 
     @Override
     public void setupEvents() {
+
+        signUpTxt.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Intent intent = new Intent(mContext, SignUpActivity.class);
+                startActivity(intent);
+
+            }
+        });
+
 
         loginBtn.setOnClickListener(new View.OnClickListener() {
             @Override

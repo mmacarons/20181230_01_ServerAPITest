@@ -48,6 +48,7 @@
             android:layout_height="wrap_content">
 
             <EditText
+                android:id="@+id/userIdEdt"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:hint="아이디를 입력하세요."
@@ -68,6 +69,7 @@
             android:layout_height="wrap_content">
 
             <EditText
+                android:id="@+id/UserPwEdt"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:hint="비밀번호를 입력하세요."
@@ -88,6 +90,7 @@
             android:layout_height="wrap_content">
 
             <EditText
+                android:id="@+id/userPwCheckEdt"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:hint="비밀번호를 다시 입력하세요."
@@ -102,7 +105,34 @@
 
         </FrameLayout>
 
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="고객 정보"/>
+
+        <EditText
+            android:id="@+id/userNameEdt"
+            android:singleLine="true"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:hint="이름 입력"/>
+
+        <EditText
+            android:id="@+id/userEmailEdt"
+            android:inputType="textEmailAddress"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:hint="이메일 입력"/>
+
+        <EditText
+            android:id="@+id/userPhoneEdt"
+            android:inputType="phone"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:hint="연락처 입력(010-1234-5678)"/>
+
     </LinearLayout>
+
 
     <TextView
         android:layout_width="wrap_content"
@@ -110,12 +140,13 @@
         android:layout_weight="1"/>
 
     <Button
+        android:id="@+id/signUpBtn"
         android:layout_width="match_parent"
         android:layout_height="52dp"
         android:background="@color/tomato"
         android:textColor="@color/white"
         android:textSize="16sp"
-        android:text="다음"/>
+        android:text="회원가입"/>
 
 
 </LinearLayout>
