@@ -101,19 +101,27 @@ public class LoginActivity extends BaseActivity {
 
                         try {
 
+//                            일단 root 먼저 가져옴
                             JSONObject root = new JSONObject(responseBody);
+
+//                            root 안의 데이터들을 가져옴
                             int code = root.getInt("code");
                             String message = root.getString("message");
+//                            단순히 하나가 아니고 안에 데이터를 여러개 가지고 있는 애는 getJSONObject로 가져옴
                             JSONObject data = root.getJSONObject("data");
 
+//                            data를 가져왔으니 그 안의 데이터를 가져옴
                             String token = data.getString("token");
                             JSONObject user = data.getJSONObject("user");
+
+//                            user를 가져왔으니 그 안의 데이터를 가져옴
                             int id = user.getInt("id");
                             String user_id = user.getString("user_id");
                             String name = user.getString("name");
                             String email = user.getString("email");
                             String phone = user.getString("phone");
 
+//                            데이터를 모두 가져왔으면 생성한 변수들을 가지고 마음대로 쓰면 됨
                             Intent intent = new Intent(mContext, MainActivity.class);
                             intent.putExtra("로그인아이디", user_id);
                             intent.putExtra("이름", name);

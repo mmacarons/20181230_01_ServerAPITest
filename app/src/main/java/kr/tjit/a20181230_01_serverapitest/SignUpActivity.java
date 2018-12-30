@@ -77,8 +77,10 @@ public class SignUpActivity extends BaseActivity {
                     return;
                 }
 
+//                1. 서버와의 통신을 담당할 client 변수 생성
                 OkHttpClient client = new OkHttpClient();
 
+//                2. 서버에 첨부할 파라미터들을 담아줄 requestBody 객체 생성
                 RequestBody requestBody = new FormBody.Builder()
                         .add("user_id", userIdEdt.getText().toString())
                         .add("password", PasswordUtil.getEncryptedPassword(UserPwEdt.getText().toString()))
@@ -87,11 +89,14 @@ public class SignUpActivity extends BaseActivity {
                         .add("email", userEmailEdt.getText().toString())
                         .build();
 
+//                3. 어느 서버로 갈지 설정하는 request 변수 생성 (자동완성 시 okhttp3 확인)
                 Request request = new Request.Builder()
                         .url("http://api-dev.lebit.kr/auth")
                         .put(requestBody)
                         .build();
 
+//                4. 통신 담당 client 변수를 사용해 위의 request를 실제로 실행
+//                   서버 응답은 Callback()으로 처리
                 client.newCall(request).enqueue(new Callback() {
                     @Override
                     public void onFailure(Call call, IOException e) {
@@ -105,10 +110,13 @@ public class SignUpActivity extends BaseActivity {
 
                     @Override
                     public void onResponse(Call call, Response response) throws IOException {
+//                        5. response 변수는 단 한번만 접근 가능하므로 따로 저장해서 사용
                         String responseBody = response.body().string();
                         Log.d("회원가입리스폰스", responseBody);
 
                         try {
+//                            6. 이 응답 JSON데이터를 가져올 땐 formatter로 보기좋게 해놓고 뽑아옴
+//                               필요한 내용들을 파싱해서 변수에 저장
                             JSONObject root = new JSONObject(responseBody);
                             final int code = root.getInt("code");
                             final String message = root.getString("message");
