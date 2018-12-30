@@ -7,6 +7,9 @@ import android.widget.Button;
 import android.widget.EditText;
 import android.widget.Toast;
 
+import org.json.JSONException;
+import org.json.JSONObject;
+
 import java.io.IOException;
 
 import kr.tjit.a20181230_01_serverapitest.utils.PasswordUtil;
@@ -17,6 +20,7 @@ import okhttp3.OkHttpClient;
 import okhttp3.Request;
 import okhttp3.RequestBody;
 import okhttp3.Response;
+import okhttp3.ResponseBody;
 
 public class SignUpActivity extends BaseActivity {
 
@@ -101,8 +105,20 @@ public class SignUpActivity extends BaseActivity {
 
                     @Override
                     public void onResponse(Call call, Response response) throws IOException {
-                        Log.d("회원가입리스폰스", response.body().string());
+                        String responseBody = response.body().string();
+                        Log.d("회원가입리스폰스", responseBody);
 
+                        try {
+                            JSONObject root = new JSONObject(responseBody);
+                            int code = root.getInt("code");
+                            String message = root.getString("message");
+
+                            Log.d("회원가입리스폰스", "코드 : " + code);
+                            Log.d("회원가입리스폰스", "메시지 : " + message);
+
+                        } catch (JSONException e) {
+                            e.printStackTrace();
+                        }
                     }
                 });
 
